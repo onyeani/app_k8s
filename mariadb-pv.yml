@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mariadb-pv
+spec:
+  capacity:
+    storage: 50Mi
+  #volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  #persistentVolumeReclaimPolicy: Recycle
+  storageClassName: mariadb
+  #mountOptions:
+    #- hard
+    #- nfsvers=4.1
+  nfs:
+    path: /srv/k8s/mariadbpv
+    server: 192.168.49.1

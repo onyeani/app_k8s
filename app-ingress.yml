@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress
+  #namespace: kubernetes-dashboard
+  labels:
+    name: app-ingress
+spec:
+  rules:
+  - host: app.com
+    http:
+      paths:
+      - pathType: Prefix
+        # Whenever a client requests for app.com, this ingress sends the req to apache2-svc internal service
+        # and looks in the webserver's document root for an index file to serve.
+        path: /
+        backend:
+          service:
+            name: apache2-svc
+            port: 
+              number: 80

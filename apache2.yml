@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apache2
+spec:
+  selector:
+    matchLabels:
+      app: apache2
+  template:
+    metadata:
+      labels:
+        app: apache2
+    spec:
+      containers:
+      - name: apache2
+        image: onyeani/apache2:1.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        #volumeMounts:
+          #- name: web
+            #mountPath: /app
+      #volumes: 
+      #- name: web
+        #persistentVolumeClaim:
+          #claimName: apache2-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: apache2-svc
+spec:
+  selector:
+    app: apache2
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+    
