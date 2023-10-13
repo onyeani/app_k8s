@@ -32,12 +32,6 @@ pipeline {
             steps {
                 // Call shell script to deploy
                 sh './deploy.sh'
-                // I tried to execute the following command from deploy.sh
-                // but for some reason it wouldn't work.
-                // Kept saying ERROR 2002 (HY000): Can't connect to local server through socket '/run/mysqld/mysqld.sock' (2)
-                // I really don't know the cause. Will find out.
-                //sh 'docker exec reviewapp_db_1 ./db_script.sh'
-                //echo 'db done'
             }
         }
         
