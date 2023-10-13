@@ -36,7 +36,7 @@ pipeline {
         }
         
     }
-
+/*
     post {
         always {
             // This executes at all times. Regardless of the status of the build
@@ -50,5 +50,6 @@ pipeline {
             echo 'build failed'
         }
     }
+    */
 
 }
