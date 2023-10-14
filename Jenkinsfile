@@ -28,7 +28,8 @@ pipeline {
             }
         }
   */
-
+  
+/*
         stage("build") {
             steps {
                 script {
@@ -51,6 +52,7 @@ pipeline {
                 sh './test.sh'
             }
         }
+        */
 
         stage("deploy") {
             steps {
