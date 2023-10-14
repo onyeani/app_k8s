@@ -37,7 +37,7 @@ pipeline {
                 // build image
                 dockerImage = docker.build("onyeani/apache2:1.0")
                 // push image to dockerhub
-                withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
+                withDockerRegistry([ credentialsId: "bfeafbc4-020a-4a68-9d75-304a3172b446", url: "" ]) {
         dockerImage.push()
             }
                 }
