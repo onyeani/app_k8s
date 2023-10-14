@@ -14,6 +14,7 @@ pipeline {
             }
         }
 
+/*
         stage("build") {
             steps {
                 // Call shell script to build
@@ -24,8 +25,22 @@ pipeline {
                 withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
         dockerImage.push()
             }
+            }
         }
-        
+  */
+
+        node {   
+    stage('Build image') {
+       dockerImage = docker.build("onyeani/apache2:1.0")
+    }
+    
+ stage('Push image') {
+        withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
+        dockerImage.push()
+        }
+    }    
+}
+
         stage("test") {
             steps {
                 // Call shell script to test
@@ -57,4 +72,4 @@ pipeline {
     }
     */
 
-}}
+}
