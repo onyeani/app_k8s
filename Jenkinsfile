@@ -57,11 +57,10 @@ pipeline {
         stage("deploy") {
             steps {
                 script {
-                    //withKubeConfig([credentialsId: 'jenkins', serverUrl: '192.168.49.2:8443']) {
-                    //sh './deploy.sh'
+                    withKubeConfig([credentialsId: 'kubernetes', serverUrl: '192.168.49.2:8443']) {
+                    sh './deploy.sh'
 
-                //}
-                    kubernetesDeploy(configs: "apache2.yml", "maridb.yml")
+                }
                 }
                 
                 // Call shell script to deploy
