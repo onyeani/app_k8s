@@ -11,5 +11,5 @@ echo 'Checking to see if webserver is up and running... should see home page...'
 # standard error to /dev/null
 until curl http://localhost:8091 2>/dev/null; do echo 'server not ready' 1>/dev/null; done
 echo 'Shutting down and removing webserver'
-docker stop webserver
-docker rm webserver
+#docker stop webserver
+#docker rm webserver

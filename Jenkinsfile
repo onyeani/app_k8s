@@ -17,7 +17,12 @@ pipeline {
         stage("build") {
             steps {
                 // Call shell script to build
-                sh './build.sh'
+                //sh './build.sh'
+                // build image
+                dockerImage = docker.build("onyeani/apache2:1.0")
+                // push image to dockerhub
+                withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
+        dockerImage.push()
             }
         }
         
