@@ -54,8 +54,12 @@ pipeline {
 
         stage("deploy") {
             steps {
+                withKubeConfig([credentialsId: 'kubernetes', serverUrl: '192.168.49.2:8443']) {
+                    sh './deploy.sh'
+
+                }
                 // Call shell script to deploy
-                sh './deploy.sh'
+                //sh './deploy.sh'
             }
         }
         
