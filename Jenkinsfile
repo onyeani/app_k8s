@@ -54,6 +54,8 @@ pipeline {
         }
         */
 
+
+/*
         stage("deploy") {
             steps {
                 script {
@@ -67,6 +69,26 @@ pipeline {
                 //sh './deploy.sh'
             }
         }
+        */
+
+        ///////////// added this
+
+        stage('setup kubeconfig') {
+          steps {
+            withCredentials([file(credentialsId: 'cd_config', variable: 'cd_config')]) {
+                sh "sudo cp \${cd_config} ${WORKSPACE}/cd_config"
+            }
+          }
+    }
+
+        stage('deploy') {
+          steps {
+                
+             sh 'sudo kubectl --kubeconfig ${WORKSPACE}/cd_config config set-context --current --user=jenkins'
+             sh 'sudo kubectl apply -f apache2.yml --kubeconfig ${WORKSPACE}/cd_config -n default'
+          }
+     }
+
         
     }
 /*
