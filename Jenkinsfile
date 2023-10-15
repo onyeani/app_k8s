@@ -55,11 +55,11 @@ pipeline {
         */
 
 
-/*
+
         stage("deploy") {
             steps {
                 script {
-                    withKubeConfig([credentialsId: 'kubernetes', caCertificate: '/home/onyeani/.minikube/ca.crt', serverUrl: 'https://192.168.49.2:8443', contextName: 'minikube', clusterName: 'minikube', namespace: 'default']) {
+                    withKubeConfig([credentialsId: 'cd_config', caCertificate: '/home/onyeani/.minikube/ca.crt', serverUrl: 'https://192.168.49.2:8443', contextName: 'minikube', clusterName: 'minikube', namespace: 'default']) {
                     sh './deploy.sh'
 
                 }
@@ -69,26 +69,11 @@ pipeline {
                 //sh './deploy.sh'
             }
         }
-        */
+        
 
         ///////////// added this
 
-        stage('setup kubeconfig') {
-          steps {
-            withCredentials([file(credentialsId: 'cd_config', variable: 'cd_config')]) {
-                //sh "sudo cp \${cd_config} ${WORKSPACE}/cd_config"
-                sh 'ls'
-            }
-          }
-    }
-
-        stage('deploy') {
-          steps {
-                
-             sh 'kubectl --kubeconfig ${WORKSPACE}/cd_config config set-context --current --user=jenkins'
-             sh 'kubectl apply -f apache2.yml --kubeconfig ${WORKSPACE}/cd_config -n default'
-          }
-     }
+       
 
         
     }
@@ -109,3 +94,22 @@ pipeline {
     */
 
 }
+
+/*
+ stage('setup kubeconfig') {
+          steps {
+            withCredentials([file(credentialsId: 'cd_config', variable: 'cd_config')]) {
+                //sh "sudo cp \${cd_config} ${WORKSPACE}/cd_config"
+                sh 'ls'
+            }
+          }
+    }
+
+        stage('deploy') {
+          steps {
+                
+             sh 'kubectl --kubeconfig ${WORKSPACE}/cd_config config set-context --current --user=jenkins'
+             sh 'kubectl apply -f apache2.yml --kubeconfig ${WORKSPACE}/cd_config -n default'
+          }
+     }
+     */
