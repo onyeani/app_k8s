@@ -58,11 +58,11 @@ pipeline {
 
         stage("deploy") {
             steps {
-                script {
-                    withKubeConfig([credentialsId: 'cd_config', caCertificate: '/home/onyeani/.minikube/ca.crt', serverUrl: 'https://192.168.49.2:8443', contextName: 'minikube', clusterName: 'minikube', namespace: 'default']) {
+                //script {
+                  //  withKubeConfig([credentialsId: 'cd_config', caCertificate: '/home/onyeani/.minikube/ca.crt', serverUrl: 'https://192.168.49.2:8443', contextName: 'minikube', clusterName: 'minikube', namespace: 'default']) {
                     sh './deploy.sh'
 
-                }
+                //}
                 }
                 
                 // Call shell script to deploy
