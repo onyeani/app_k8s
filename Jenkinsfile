@@ -85,8 +85,8 @@ pipeline {
         stage('deploy') {
           steps {
                 
-             sh 'sudo kubectl --kubeconfig ${WORKSPACE}/cd_config config set-context --current --user=jenkins'
-             sh 'sudo kubectl apply -f apache2.yml --kubeconfig ${WORKSPACE}/cd_config -n default'
+             sh 'kubectl --kubeconfig ${WORKSPACE}/cd_config config set-context --current --user=jenkins'
+             sh 'kubectl apply -f apache2.yml --kubeconfig ${WORKSPACE}/cd_config -n default'
           }
      }
 
