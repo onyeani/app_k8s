@@ -57,7 +57,7 @@ pipeline {
         stage("deploy") {
             steps {
                 script {
-                    withKubeConfig([credentialsId: 'jenkins', caCertificate: '/home/onyeani/.minikube/ca.crt', serverUrl: '192.168.49.2:8443', contextName: 'minikube', clusterName: 'minikube', namespace: 'default']) {
+                    withKubeConfig([credentialsId: 'kubernetes', caCertificate: '/home/onyeani/.minikube/ca.crt', serverUrl: '192.168.49.2:8443', contextName: 'minikube', clusterName: 'minikube', namespace: 'default']) {
                     sh './deploy.sh'
 
                 }
