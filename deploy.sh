@@ -36,6 +36,8 @@ export DBPOD=$(kubectl get pod | awk '/^mariadb/{print $1}')
 ### Note: I suspect that by the time we get to this point, the DB pod might not be up and running.
 # To guard against this, I introduce a loop, in this case the until loop.
 # Which means our program will not progress until the cp commands succeed.
+echo 'sleeping for 20s'
+sleep 20
 until kubectl cp db_file.sql $DBPOD:/ 2>/dev/null; do echo 'server not ready' 1>/dev/null; done
 
 # Once we get past the previous loop, there'll be no need to put the second copy command in a loop 
@@ -44,6 +46,8 @@ kubectl cp db_script.sh $DBPOD:/
 echo 'Files copied successfully...'
 
 echo 'Creating db, table, user and whatnot...'
+echo 'sleeping for 40s'
+sleep 40
 until kubectl exec $DBPOD ./db_script.sh 2>/dev/null; do echo 'server not ready' 1>/dev/null; done
 #kubectl exec $DBPOD ./db_script.sh
 echo 'db, table, user, whatnot creation successful'
