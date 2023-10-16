@@ -14,7 +14,7 @@ spec:
       containers:
       - name: mariadb
         image: mariadb
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - containerPort: 3306
         #volumeMounts:

@@ -14,7 +14,7 @@ spec:
       containers:
       - name: apache2
         image: onyeani/apache2:1.0
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
         #volumeMounts:
