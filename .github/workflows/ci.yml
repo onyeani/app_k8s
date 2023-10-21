@@ -25,6 +25,7 @@ jobs:
         REMOTE_USER: ${{secrets.REMOTE_USER}}
         TARGET: ${{secrets.TARGET}}
         SCRIPT_BEFORE: |
+          ls
           kubectl get pod
           pwd
 
