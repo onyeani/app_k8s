@@ -28,4 +28,5 @@ jobs:
           pwd
           kubectl get pod
           ls
+          ./deploy.sh
 
