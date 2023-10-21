@@ -4,7 +4,7 @@
 echo 'Deploying app ...'
 # First, we prepare environment by creating secrets, configsmaps...
 echo 'Creating configmap and secrets'
-kubectl apply -f mariadb-configmap.yml
+#kubectl apply -f mariadb-configmap.yml
 kubectl apply -f mariadb-secret.yml
 
 # Our persistent volume uses nfs
@@ -12,12 +12,12 @@ kubectl apply -f mariadb-secret.yml
 # we are using as our nfs server and have exported the dirs we 
 # are making available with the pv
 echo 'Creating persitent volume for the webserver and db'
-kubectl apply -f apache2-pv.yml
-kubectl apply -f mariadb-pv.yml
+#kubectl apply -f apache2-pv.yml
+#kubectl apply -f mariadb-pv.yml
 
 echo 'Creating persistent volume claim for webserver and db'
-kubectl apply -f apache2-pvc.yml
-kubectl apply -f mariadb-pvc.yml
+#kubectl apply -f apache2-pvc.yml
+#kubectl apply -f mariadb-pvc.yml
 
 echo 'Creating apache2 and apache2-svc'
 # The k8s manifest file 'apache2.yml' contains instructions
