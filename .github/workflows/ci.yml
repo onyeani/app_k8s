@@ -17,7 +17,7 @@ jobs:
     - name: Build the Docker image
       run: ./build.sh
     - name: Deploy to my EC2 instance
-        uses: easingthemes/ssh-deploy@v2.1.5
+        uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
           SOURCE: "./"
