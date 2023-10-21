@@ -9,7 +9,7 @@ echo 'Checking to see if webserver is up and running... should see home page...'
 # This is because the server is still initialising when the request is made.
 # For this reason, I have put this request in a loop and redirected 
 # standard error to /dev/null
-until curl http://localhost:8091 2>/dev/null; do echo 'server not ready' 1>/dev/null; done
+until curl http://localhost:8091 2>/dev/null; do sleep 5; done
 echo 'Shutting down and removing webserver'
-#docker stop webserver
-#docker rm webserver
+docker stop webserver
+docker rm webserver

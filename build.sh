@@ -13,5 +13,7 @@ echo 'tagging image just built with my docker ID'
 docker tag apache2:1.0 onyeani/apache2:1.0
 # To push image to docker hub, user must first be logged in to docker hub
 # To login, issue: 'docker login' on commandline, and then provide login credentials
+echo "login to docker hub"
+docker login -u onyeani -p johnny4U@
 echo "Pushing image to docker hub"
 docker push onyeani/apache2:1.0
