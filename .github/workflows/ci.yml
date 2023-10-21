@@ -25,6 +25,6 @@ jobs:
         REMOTE_USER: ${{secrets.REMOTE_USER}}
         TARGET: ${{secrets.TARGET}}
         SCRIPT_BEFORE: |
-        whoami
-        ls -al
+          whoami
+          ls -al
 
