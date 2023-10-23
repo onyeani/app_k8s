@@ -15,4 +15,4 @@ spec:
     #- nfsvers=4.1
   nfs:
     path: /srv/k8s/mariadbpv
-    server: 192.168.49.1
+    server: 172.31.32.12

@@ -22,7 +22,10 @@ echo 'Creating persistent volume claim for webserver and db'
 echo 'Creating apache2 and apache2-svc'
 # The k8s manifest file 'apache2.yml' contains instructions
 # for creating apache2 and apache2-svc  
-# Here we introduce and if statement to check for the status of apache2
+# Here we introduce an if statement to check for the status of apache2.
+# If apache2 exists, we delete it and create again.
+# the while loop is to ensure that the pod is completely terminated before creating anew.
+# If we don't let pods be  completely gone, then we risk grabbing the wrong podname with awk...
 if kubectl get deploy apache2 > /dev/null 2>&1
     then kubectl delete -f apache2.yml
     while kubectl get pod|grep -i apache2
@@ -54,12 +57,13 @@ fi
 # Which means our program will not progress until the cp commands succeed.
 
 echo "Waiting for DB server to be ready for connections..."
-until kubectl logs $DBPOD 2>/dev/null | grep -i "ready for connections" > /dev/null 2>&1; do sleep 10; done
-echo "DB says it's ready for connections, but we sleep for 10s for safety."
+#until kubectl logs $DBPOD 2>/dev/null | grep -i "ready for connections" > /dev/null 2>&1; do sleep 10; done
+until [ `kubectl logs $DBPOD 2>/dev/null | grep -i "ready for connections" | wc -l` -eq 2 ]; do sleep 10; done
+echo "DB says it's ready for connections..."
 # The reason I decided to sleep for 10s is because when I looked at the logs,
 # I obeserved that the DB said it was ready for connections at two instances that are about 7s apart.
-sleep 10
-echo 'Done sleeping. We should be good to go.'
+#sleep 10
+#echo 'Done sleeping. We should be good to go.'
 echo 'Moving files to DB server...'
 # In the next line of code, we sleep for 5s if DB is still not ready for connections before checking again
 # We leave the loop as soon as the cp command succeeds. I acknowledge this loop is not necessary 
@@ -80,11 +84,12 @@ echo 'db, table, user, whatnot creation successful'
 # panic when run from jenkins. I had to comment it out to avoid.
 # Besides we don't need that in the pipeline, since it's not something we do always.
 #minikube addons enable ingress
-kubectl apply -f app-ingress.yml
+#kubectl apply -f app-ingress.yml
+
+# I am no longer using minikube. I am deploying this to AWS EC2 instance using Github Actions.
+# I have configured an external svc for testing purposes but would later config ingress...
 
 export WEBPOD=$(kubectl get pod | awk '/^apache2/{print $1}')
 until kubectl logs $WEBPOD 2>/dev/null | grep -i 'ready to handle connections' > /dev/null 2>&1;
 do echo "Webserver isn't ready to handle connections"; sleep 10; done
-echo "Webserver ready. Map app.com to node's IP in /etc/hosts file and thereafter point browser to app.com to access app."
-# NB. In production, we would be using our registered domain name here
-# which has been mapped to our public IP
+echo "Webserver ready. Point browser to onyeani.duckdns.org:30002 to access app."

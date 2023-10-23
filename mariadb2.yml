@@ -20,9 +20,9 @@ spec:
         ports:
         - containerPort: 3306
           name: mariadb
-        #volumeMounts:
-          #- name: db
-            #mountPath: /var/lib/mysql
+        volumeMounts:
+          - name: db
+            mountPath: /var/lib/mysql
         env:
         - name: MARIADB_ALLOW_EMPTY_ROOT_PASSWORD
           valueFrom:
@@ -34,10 +34,10 @@ spec:
             secretKeyRef:
               key: mariadb-root-user-password
               name: mariadb-secret
-      #volumes:
-      #- name: db
-        #persistentVolumeClaim:
-          #claimName: mariadb-pvc
+      volumes:
+      - name: db
+        persistentVolumeClaim:
+          claimName: mariadb-pvc
 ---
 apiVersion: v1
 kind: Service

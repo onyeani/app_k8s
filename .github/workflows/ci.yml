@@ -14,9 +14,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: ./build.sh
-    - name: Deploy to my EC2 instance
+    - name: Build Docker image and push to Dockerhub
+      run: |
+        docker login -u ${{secrets.DOCKER_HUB_ID}} -p ${{secrets.DOCKER_HUB_PW}}
+        ./build.sh
+    - name: Deploy to AWS EC2 instance
       uses: easingthemes/ssh-deploy@main
       with:
         SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
@@ -25,8 +27,6 @@ jobs:
         REMOTE_USER: ${{secrets.REMOTE_USER}}
         #TARGET: ${{secrets.TARGET}}
         SCRIPT_AFTER: |
-          pwd
           kubectl get pod
-          ls
           ./deploy.sh
 

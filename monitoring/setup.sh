@@ -2,7 +2,7 @@
 
 kubectl cp grants.sql mariadb-0:/
 kubectl cp db_script.sh mariadb-0:/
-kubectl exec mariadb-0 ./db_script.sh
+kubectl exec mariadb-0 -- ./db_script.sh
 
 helm update
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
