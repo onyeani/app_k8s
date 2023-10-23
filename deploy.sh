@@ -89,7 +89,8 @@ echo 'db, table, user, whatnot creation successful'
 # I am no longer using minikube. I am deploying this to AWS EC2 instance using Github Actions.
 # I have configured an external svc for testing purposes but would later config ingress...
 
-export WEBPOD=$(kubectl get pod | awk '/^apache2/{print $1}')
-until kubectl logs $WEBPOD 2>/dev/null | grep -i 'ready to handle connections' > /dev/null 2>&1;
-do echo "Webserver isn't ready to handle connections"; sleep 10; done
-echo "Webserver ready. Point browser to onyeani.duckdns.org:30002 to access app."
+#export WEBPOD=$(kubectl get pod | awk '/^apache2/{print $1}')
+#until kubectl logs $WEBPOD 2>/dev/null | grep -i 'ready to handle connections' > /dev/null 2>&1;
+#do echo "Webserver isn't ready to handle connections"; sleep 10; done
+#echo "Webserver ready. Point browser to onyeani.duckdns.org:30002 to access app."
+echo "DONE."
