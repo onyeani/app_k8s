@@ -28,4 +28,5 @@ With everything looking good, I decided to deploy my project in a cloud environm
 
 As soon as the pipeline was in place, I realised its importance. Before the pipeline, I had to do everything
 all over whenever I made a change, no matter how small. But the tedium was gone as soon as I implemented it.
-The realisation of the pipeline's importance is reminiscent of the feeling I got when I first figured out the value and purity of the shell.
+The realisation of the pipeline's importance is reminiscent of the feeling I got when I first figured out the value and purity of the shell. 
+
